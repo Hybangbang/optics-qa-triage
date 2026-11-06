@@ -1,0 +1,31 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -e .
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Secret scan
+        run: |
+          if [ -e .env ]; then
+            echo "A tracked .env file is not allowed"; exit 1
+          fi
+          if grep -RInE '(REDDIT_CLIENT_SECRET|LLM_API_KEY|SMTP_PASSWORD)[[:space:]]*=[[:space:]]*["'\'']?[A-Za-z0-9_./+:-]{12,}' --exclude-dir=__pycache__ src; then
+            echo "Potential secret found"; exit 1
+          fi
+      - name: Write-endpoint scan
+        run: |
+          if grep -RInE '(/api/comment|/api/vote|/api/submit|/api/compose|/api/del)' src; then
+            echo "Write endpoint found"; exit 1
+          fi

@@ -1,0 +1,51 @@
+[
+  {
+    "id": "fixture001",
+    "subreddit": "Optics",
+    "title": "How do I specify surface figure and scratch-dig on a window drawing?",
+    "selftext": "I need a 25 mm BK7 window for a 633 nm laser. Is lambda/10 surface figure and 60-40 scratch-dig reasonable, and how should I write the tolerance on the drawing? The application is a low-power lab setup.",
+    "permalink": "https://www.reddit.com/r/Optics/comments/fixture001/example_window/",
+    "created_utc": 1762300000.0
+  },
+  {
+    "id": "fixture002",
+    "subreddit": "Optics",
+    "title": "AR coating for 1064 nm fused silica: what damage threshold should I ask for?",
+    "selftext": "I am designing a small beam-delivery path for a pulsed 1064 nm laser. The fused silica window is 12.7 mm diameter. What AR coating specification and laser-induced damage threshold should I discuss with the coater? Pulse length is 10 ns, repetition rate 10 Hz.",
+    "permalink": "https://www.reddit.com/r/Optics/comments/fixture002/example_coating/",
+    "created_utc": 1762300600.0
+  },
+  {
+    "id": "fixture003",
+    "subreddit": "Optics",
+    "title": "Looking for a custom prism supplier for 500 pieces",
+    "selftext": "We need a custom N-BK7 prism, 20 mm aperture, 500 pieces. Please send a quote and lead time. DM me for the drawing.",
+    "permalink": "https://www.reddit.com/r/Optics/comments/fixture003/example_sourcing/",
+    "created_utc": 1762301200.0
+  },
+  {
+    "id": "fixture004",
+    "subreddit": "Optics",
+    "title": "Weekly meme thread",
+    "selftext": "Post your best optics memes here.",
+    "permalink": "https://www.reddit.com/r/Optics/comments/fixture004/example_meme/",
+    "created_utc": 1762301800.0
+  },
+  {
+    "id": "fixture005",
+    "subreddit": "Optics",
+    "title": "[deleted]",
+    "selftext": "[deleted]",
+    "permalink": "https://www.reddit.com/r/Optics/comments/fixture005/example_deleted/",
+    "created_utc": 1762302400.0,
+    "removed": true
+  },
+  {
+    "id": "fixture006",
+    "subreddit": "Optics",
+    "title": "How do I interpret a Zygo interferometer report?",
+    "selftext": "The report shows PV, RMS, and a slope map. I understand PV and RMS, but what does the slope map tell me for a mirror that will be used at a small angle of incidence? The mirror is 50 mm diameter and the wavelength is 532 nm.",
+    "permalink": "https://www.reddit.com/r/Optics/comments/fixture006/example_metrology/",
+    "created_utc": 1762303000.0
+  }
+]
