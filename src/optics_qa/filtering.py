@@ -154,7 +154,6 @@ SKIP_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
 COMMERCIAL_PATTERNS: tuple[re.Pattern[str], ...] = tuple(
     re.compile(pattern, re.IGNORECASE)
     for pattern in (
-        r"\btradeopc\b",
         r"\bour (company|factory|team|shop|production line)\b",
         r"\bwe (offer|manufacture|produce|supply|fabricate)\b",
         r"\bcontact (us|me)\b",
