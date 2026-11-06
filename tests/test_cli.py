@@ -9,6 +9,8 @@ from pathlib import Path
 from unittest.mock import patch
 
 from optics_qa.cli import main
+from optics_qa.models import DraftResult
+from tests.helpers import make_post
 
 
 SAMPLE = (
@@ -74,6 +76,42 @@ class CliTests(unittest.TestCase):
                     code = main(["review"])
                 self.assertEqual(code, 0)
                 self.assertIn("Answer draft", review.getvalue())
+
+    def test_reddit_poll_passes_rules_to_provider(self) -> None:
+        seen: dict[str, str] = {}
+
+        class FakeRedditSource:
+            def __init__(self, settings) -> None:
+                self.settings = settings
+
+            def fetch(self, limit: int = 100):
+                return [make_post()]
+
+            def fetch_rules(self) -> str:
+                return "- Be civil\n- No self-promotion"
+
+        class FakeProvider:
+            def draft(self, post, rules_text: str = "") -> DraftResult:
+                seen["rules_text"] = rules_text
+                return DraftResult("A" * 200, "medium", [], "test")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            env = {
+                "OPTICS_QA_DB": str(Path(tmp) / "queue.sqlite3"),
+                "OPTICS_QA_OUTBOX": str(Path(tmp) / "outbox"),
+                "LLM_API_KEY": "",
+            }
+            with patch.dict(os.environ, env, clear=False):
+                with (
+                    patch("optics_qa.cli.RedditSource", FakeRedditSource),
+                    patch("optics_qa.cli.make_provider", return_value=FakeProvider()),
+                    redirect_stdout(io.StringIO()),
+                    redirect_stderr(io.StringIO()),
+                ):
+                    code = main(["poll", "--source", "reddit", "--no-email"])
+
+        self.assertEqual(code, 0)
+        self.assertIn("No self-promotion", seen["rules_text"])
 
 
 if __name__ == "__main__":

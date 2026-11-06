@@ -32,7 +32,7 @@ The tool has no Reddit write path. Any post that is not an optics-related techni
 - Scope: `read` only.
 - Endpoint: `GET https://oauth.reddit.com/r/Optics/new`.
 - Optional endpoint: `GET https://oauth.reddit.com/r/Optics/about/rules`.
-- Frequency: at most once every 10 minutes, about 6 requests per hour.
+- Frequency: at most once every 10 minutes; one listing request plus one rules request per poll, at most 12 requests per hour.
 - Requested fields: post ID, subreddit, title, public selftext, permalink, timestamps, and moderation flags necessary to skip removed/stickied posts.
 - No private messages, modmail, account profile data, or non-public content.
 - No posting, commenting, voting, messaging, moderation, or advertising endpoints.
@@ -43,7 +43,7 @@ This is a private, standalone monitor operated by a non-moderator. It must run o
 
 ## Data minimization and retention
 
-- Raw post content is processed in memory and is not written to SQLite.
+- Full post bodies are processed in memory and are not stored as a separate field; a review excerpt is capped at 280 characters.
 - SQLite contains no author name and no full post body.
 - Drafts, short excerpts, permalinks, and post IDs are hard-deleted within 48 hours.
 - `mark-replied` deletes an item immediately after the human posts.

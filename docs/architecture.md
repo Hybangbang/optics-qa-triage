@@ -26,7 +26,7 @@ flowchart LR
 - Endpoint: `GET https://oauth.reddit.com/r/Optics/new?limit=100&raw_json=1`.
 - Optional rules endpoint: `GET https://oauth.reddit.com/r/Optics/about/rules`.
 - Poll at most once per 10 minutes.
-- Free-tier limit: 100 QPM per OAuth client ID; this design uses about 6 requests/hour.
+- Free-tier limit: 100 QPM per OAuth client ID; this design uses at most 12 requests/hour.
 - Monitor `X-Ratelimit-Used`, `X-Ratelimit-Remaining`, and `X-Ratelimit-Reset`.
 - On 429/5xx, back off with jitter; never retry aggressively.
 - No `/api/comment`, `/api/vote`, `/api/submit`, `/api/compose`, or moderation endpoints.

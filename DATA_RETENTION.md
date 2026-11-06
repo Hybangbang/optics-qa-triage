@@ -4,7 +4,7 @@ Reddit's Data API guidance recommends routinely deleting stored user data and co
 
 | Data | Where | Retention |
 |---|---|---|
-| Raw post body | Process memory only | Discarded after the draft is produced |
+| Full post body | Process memory only | Not stored as a separate field; a review excerpt is capped at 280 characters |
 | Draft answer | SQLite + email/outbox | 48 hours, or immediately after `mark-replied` |
 | Short excerpt | SQLite + email/outbox | 48 hours |
 | Permalink | SQLite + email/outbox | 48 hours |

@@ -21,7 +21,7 @@ Only to produce a draft for the operator to review and post manually. Drafts are
 
 ## Retention
 
-- Raw post bodies are processed in memory and are not persisted by this tool.
+- Full post bodies are not stored as a separate field; a review excerpt capped at 280 characters is stored with the draft.
 - Drafts, excerpts, and permalinks are hard-deleted within 48 hours.
 - Post IDs and status metadata are hard-deleted within 48 hours.
 - Local outbox emails are deleted by `optics-qa purge` after the retention window.

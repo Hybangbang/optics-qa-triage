@@ -108,6 +108,13 @@ def cmd_poll(args: argparse.Namespace, settings: Settings) -> int:
         store.close()
         return 3
 
+    rules_text = ""
+    if args.source == "reddit":
+        try:
+            rules_text = source.fetch_rules()
+        except Exception as exc:
+            print(f"Could not fetch subreddit rules: {exc}", file=sys.stderr)
+
     provider = make_provider(settings, no_llm=args.no_llm)
     items: list[ReviewItem] = []
     new_count = 0
@@ -127,7 +134,7 @@ def cmd_poll(args: argparse.Namespace, settings: Settings) -> int:
             skipped_count += 1
             continue
         try:
-            draft = provider.draft(post)
+            draft = provider.draft(post, rules_text=rules_text)
         except Exception as exc:
             print(f"Draft failed for {post.post_id}: {exc}", file=sys.stderr)
             continue

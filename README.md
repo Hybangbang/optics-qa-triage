@@ -78,9 +78,10 @@ optics-qa selftest
 
 ## Data handling
 
-- Raw post content is processed in memory and is not written to SQLite.
+- Full post bodies are processed in memory and are not stored as a separate SQLite field.
+- A review excerpt capped at 280 characters is stored with the draft.
 - Drafts, short excerpts, and permalinks are retained for at most 48 hours.
-- Author names, full post bodies, and profile URLs are not persisted.
+- Author names and profile URLs are not persisted.
 - Logs contain post IDs and HTTP status codes, not titles, bodies, or authors.
 - Email/outbox messages should be deleted after posting; `optics-qa purge` cleans the local outbox.
 
